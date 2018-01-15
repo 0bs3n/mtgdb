@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h2 MTG Card Search
+    if locals.errors
+        p hello world
+        for err in locals.errors
+            p(style="color: red") #{err}
+    form(action="/result" method="GET")
+        input(type="text" name="name" placeholder="Card Name")
+        input(type="checkbox" id="fuzzySarch" name="fuzzy" value="true")
+        label(for="fuzzySearch") Match Substrings
+        br
+        input(type="text" name="colorIdentity" placeholder="Color Identity")
+        br
+        input(type="text" name="power" placeholder="Power")
+        br
+        input(type="text" name="toughness" placeholder="Toughness")
+        br
+        input(type="text" name="rarity" placeholder="Rarity")
+        br
+        input(type="text" name="_cmc" placeholder="CMC test")
+        br
+        button(action="submit") Submit
+

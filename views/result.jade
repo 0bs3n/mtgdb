@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    - const indent = "&nbsp&nbsp&nbsp&nbsp"
+    h2 Results:
+    if (cards.length)
+        for card in cards.slice(0, 10)
+            img(src="#{card.imageUrl}")
+    else
+        h3(style="color: red") !{indent}No Cards Found
