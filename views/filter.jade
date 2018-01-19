@@ -3,15 +3,44 @@ extends layout
 block content
     h2 MTG Card Search
     if locals.errors
-        p hello world
         for err in locals.errors
-            p(style="color: red") #{err}
+            p(style="color: red") #{err.msg}
     form(action="/result" method="GET")
         input(type="text" name="name" placeholder="Card Name")
         input(type="checkbox" id="fuzzySarch" name="fuzzy" value="true")
         label(for="fuzzySearch") Match Substrings
         br
-        input(type="text" name="colorIdentity" placeholder="Color Identity")
+        br
+
+        // TODO: allow this to be matched to exactly the color id input
+        | Colors:
+        input(type="checkbox" id="U" name="colors" value="Blue")
+        label(for="U") U
+        input(type="checkbox" id="R" name="colors" value="Red")
+        label(for="R") R
+        input(type="checkbox" id="B" name="colors" value="Black")
+        label(for="B") B
+        input(type="checkbox" id="G" name="colors" value="Green")
+        label(for="G") G
+        input(type="checkbox" id="W" name="colors" value="White")
+        label(for="W") W
+
+        br
+        br
+        | Rarity: 
+        select
+            option(value="") Any
+            option(value="Common") Common
+            option(value="Uncommon") Uncommon
+            option(value="Rare") Rare
+            option(value="Mythic Rare") Mythic Rare
+            option(value="Timeshifted") TimeShifted
+            option(value="Masterpiece") Masterpiece
+        br
+        br
+        input(type="text" name="types" placeholder="Type")
+        br
+        input(type="text" name="subtypes" placeholder="Subtypes")
         br
         input(type="text" name="power" placeholder="Power")
         br
@@ -19,7 +48,11 @@ block content
         br
         input(type="text" name="rarity" placeholder="Rarity")
         br
-        input(type="text" name="_cmc" placeholder="CMC test")
+        input(type="text" name="_cmc" placeholder="CMC")
+        input(type="radio" name="cmcQual" value="$gt" id="gt")
+        label(for="gt") Greater than &nbsp;
+        input(type="radio" name="cmcQual" value="$lt" id="lt")
+        label(for="gt") Less than &nbsp
         br
         button(action="submit") Submit
 
