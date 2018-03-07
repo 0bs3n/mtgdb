@@ -6,6 +6,7 @@ const db = mongojs("MTGCards", ["Cards"])
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
 
+
 router.get('/', 
     [
         check('_cmc', "CMC must be a whole number")
@@ -28,12 +29,6 @@ router.get('/',
     }, 
     (req, res, next) => {
         db.cards.find(req.query, (err, cards) => {
-            // cards = cards.filter((card, pos, arr) => {
-                // arr.map(obj => {
-                    // obj["name"].indexOf(card["name"]) === pos
-                // })
-            // })
-            console.log(cards.map(card => card.name))
             res.render('result', { cards: cards })
             console.log("Found TOTAL: " + cards.length + " cards")
         })
@@ -41,6 +36,7 @@ router.get('/',
 );
 
 function cleanQuery(query) { 
+    console.log(query)
     const nameString = query.name
     const cmc = +query._cmc
     const regex = new RegExp("^" + nameString + "$", "i")
