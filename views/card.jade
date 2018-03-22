@@ -1,1 +1,10 @@
-p card id is #{test}
+extends layout
+block content
+    h4 #{cards[0].name}
+
+    p #{cards[0].text}
+    p
+        em #{flavor}
+
+    for card in cards
+        img(src="#{card.imageUrl}")

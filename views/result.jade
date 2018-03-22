@@ -5,6 +5,9 @@ block content
     h2 Results:
     if (cards.length)
         for card in cards.slice(0, 10)
-            img(src="#{card.imageUrl}" data-id="#{card._id}")
+            div(style="width: auto")
+                p #{card.name}
+                a(href="card/#{card.name}")
+                    img(src="#{card.imageUrl}" data-id="#{card.id}") 
     else
         h3(style="color: red") !{indent}No Cards Found

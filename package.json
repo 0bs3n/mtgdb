@@ -15,6 +15,7 @@
     "jade": "~1.11.0",
     "mongojs": "^2.4.1",
     "morgan": "~1.9.0",
+    "promised-mongo": "^1.2.0",
     "serve-favicon": "~2.4.5"
   }
 }

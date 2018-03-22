@@ -1,7 +1,8 @@
-const pmongo = require("mongojs");
+const pmongo = require("promised-mongo");
 const db = pmongo("MTGCards", ["cards"]);
 
-let cardsCondense = items => {
+
+function groupByName(items) {
     let uniqueCards = [];
     for ( let i = 0; i < items.length; ++i) {
         if (!uniqueCards.filter(x => x.name === items[i].name).length) {
@@ -12,34 +13,52 @@ let cardsCondense = items => {
         }
     }
     return uniqueCards;
-};
+}
 
-let makeCardList = async (query, collection) => {
-    console.log("calling");
-    let results = await collection.find(query).toArray();
-    return cardsCondense(results);
-};
 
-let cards = makeCardList({ name: { "$regex": /.*blood.*/i }}, db.cards)
-    .then(list => list);
-
-// db.cards.find().then((err, cards) => console.log(cards));
-
-// cards.then((cards) => console.log(cards));
-
-cards.then((cards) => {
-    db.cards.find({}, ((err, result) => { 
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(result);
-        }
-    }));
-});
-/*
-cards.then((cards) => cards.map(card => {
-    db.cards.find({ id: card.idList[0]}, (err, result) => {
-        console.log(result);
+function cardList(collection, query) {
+    return new Promise((resolve, reject) => {
+        collection.find(query).toArray().then(result => {
+            if (result) 
+                resolve(result); 
+            else 
+                reject(new Error("no can do bud"));
+        });
     });
-}));
-*/
+}
+
+
+function finalList(full, condensed) {
+    let imgUrlList = [];
+    for (let i of condensed) {
+        full.map(obj => {
+            if (obj.id === i.idList[0]) {
+                imgUrlList.push({ 
+                    id: obj.id, 
+                    imageUrl: obj.imageUrl,
+                    name: obj.name
+                });
+            }
+        });
+    }
+    return imgUrlList;
+}
+
+function parseForImages(collection, query) {
+    let fullCardList = cardList(collection, query);
+    let newCards = fullCardList.then(cards => {
+        return new Promise((resolve, reject) => {
+            resolve(groupByName(cards));
+            reject(new Error("OH NO"));
+        });
+    });
+    return Promise.all([
+        fullCardList,
+        newCards
+    ]).then(sets => {
+        let full = sets[0];
+        let condensed = sets[1];
+        return finalList(full, condensed);
+    });
+}
+module.exports = parseForImages;
