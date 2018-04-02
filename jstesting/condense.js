@@ -1,5 +1,5 @@
 const pmongo = require("promised-mongo");
-const db = pmongo("MTGCards", ["cards"]);
+const db = pmongo("MTGCards", ["Cards"]);
 
 
 function groupByName(items) {

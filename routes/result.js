@@ -28,7 +28,7 @@ router.get('/',
         }
     }, 
     (req, res, next) => {
-        parseForImages(db.cards, req.query).then(cards => {
+        parseForImages(db.Cards, req.query).then(cards => {
             res.render('result', { cards: cards });
         });
     }

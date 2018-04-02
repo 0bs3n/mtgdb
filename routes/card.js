@@ -4,7 +4,7 @@ const db = pmongo('MTGCards', ['Cards'])
 const router = express.Router();
 
 router.get('/:name', (req, res) => {
-    db.cards.find({ name: req.params.name }).then(cards => {
+    db.Cards.find({ name: req.params.name }).then(cards => {
         cards.sort((a, b) => a.multiverseid - b.multiverseid)
         let flavor = cards.find(card => card.flavor)
         flavor = flavor ? flavor.flavor : null
