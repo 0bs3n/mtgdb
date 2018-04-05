@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongojs = require('promised-mongo');
 // const db = mongojs("mongodb://public:public@ds251217.mlab.com:51217/mtgcards", ["cards"])
-const db = mongojs("MTGCards", ["Cards"])
+const db = mongojs("MTGCards", ["cards"])
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
 const parseForImages = require('../jstesting/condense.js');
@@ -28,7 +28,7 @@ router.get('/',
         }
     }, 
     (req, res, next) => {
-        parseForImages(db.Cards, req.query).then(cards => {
+        parseForImages(db.cards, req.query).then(cards => {
             res.render('result', { cards: cards });
         });
     }

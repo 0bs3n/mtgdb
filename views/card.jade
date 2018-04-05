@@ -6,5 +6,9 @@ block content
     p
         em #{flavor}
 
+    for deck in decks
+        a(href="/deck/#{deck._id}") #{deck.name}
+        br
+
     for card in cards
         img(src="#{card.imageUrl}")

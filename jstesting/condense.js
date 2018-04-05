@@ -1,7 +1,3 @@
-const pmongo = require("promised-mongo");
-const db = pmongo("MTGCards", ["Cards"]);
-
-
 function groupByName(items) {
     let uniqueCards = [];
     for ( let i = 0; i < items.length; ++i) {

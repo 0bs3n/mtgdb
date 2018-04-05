@@ -12,6 +12,7 @@ var result = require('./routes/result');
 var filter = require('./routes/filter');
 var build = require('./routes/build');
 var card = require('./routes/card');
+var deck = require('./routes/deck');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/result', result)
 app.use('/filter', filter)
 app.use('/build', build)
 app.use('/card', card)
+app.use('/deck', deck)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

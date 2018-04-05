@@ -1,0 +1,11 @@
+extends layout
+block content
+    h2 #{deck.name}
+
+    h3 Maindeck
+    for card in deck.maindeck
+        p #{card.quantity} x #{card.name}
+
+    h3 Sideboard
+    for card in deck.sideboard
+        p #{card.quantity} x #{card.name}

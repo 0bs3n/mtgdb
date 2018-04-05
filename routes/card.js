@@ -1,14 +1,21 @@
 const express = require('express');
 const pmongo = require('promised-mongo')
-const db = pmongo('MTGCards', ['Cards'])
+const db = pmongo('MTGCards', ['cards'])
 const router = express.Router();
 
 router.get('/:name', (req, res) => {
-    db.Cards.find({ name: req.params.name }).then(cards => {
+    db.cards.find({ name: req.params.name }).then(cards => {
         cards.sort((a, b) => a.multiverseid - b.multiverseid)
         let flavor = cards.find(card => card.flavor)
         flavor = flavor ? flavor.flavor : null
-        res.render('card', { cards: cards, flavor: flavor })
+        db.Decks.find({ "maindeck.name": { $in: [ cards[0].name ]}, format: "modern"}).then(decks => {
+            decks.sort((a, b) => b.metaPercentage - a.metaPercentage)
+            res.render('card', { 
+                    cards: cards, 
+                    flavor: flavor, 
+                    decks: decks.slice(0, 10) 
+                })
+        })
     })
 })
 
