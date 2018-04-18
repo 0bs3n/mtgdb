@@ -19,6 +19,7 @@ as well as a list of all decks in the meta currently playing the card. This info
 ![card view](docs/card_view.png)
 
 The linked decks can be followed, and information on the maindeck and sideboard, as well as the percentage of the meta taken by the deck, is sent to the view.
+Each card listed in the deck leads back to a card view for more information on the card.
 
 ![deck view](docs/deck_view.png)
 
