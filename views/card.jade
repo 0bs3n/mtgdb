@@ -1,14 +1,20 @@
 extends layout
 block content
-    h4 #{cards[0].name}
+    h3 #{cards[0].name}
 
     p #{cards[0].text}
     p
         em #{flavor}
 
-    for deck in decks
-        a(href="/deck/#{deck._id}") #{deck.name}
-        br
+    if decks.length
+        h4 Found in:
+        ul
+            for deck in decks
+                - if (deck.format === "commander_1v1") deck.format = "commander"
+                - let format = deck.format.charAt(0).toUpperCase() + deck.format.slice(1)
+                li 
+                    a(href="/deck/#{deck._id}") [#{format}] 
+                        em #{deck.name}
 
     for card in cards
         img(src="#{card.imageUrl}")

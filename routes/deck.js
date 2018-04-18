@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get('/:deckId', (req, res) => {
     db.Decks.findOne({ "_id": ObjectId(req.params.deckId)}).then(deck => {
-        res.render('deck', { deck: deck })
+        let format = deck.format[0].toUpperCase() + deck.format.slice(1)
+        res.render('deck', { deck: deck, format: format })
     })
 })
 

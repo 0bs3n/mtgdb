@@ -8,12 +8,16 @@ router.get('/:name', (req, res) => {
         cards.sort((a, b) => a.multiverseid - b.multiverseid)
         let flavor = cards.find(card => card.flavor)
         flavor = flavor ? flavor.flavor : null
-        db.Decks.find({ "maindeck.name": { $in: [ cards[0].name ]}, format: "modern"}).then(decks => {
+        db.Decks.find(
+            { 
+                "maindeck.name": { $in: [ cards[0].name ]}, 
+                $nor: [ { format: "commander" }, { format: "commander_1v1"} ]
+            }).then(decks => {
             decks.sort((a, b) => b.metaPercentage - a.metaPercentage)
             res.render('card', { 
                     cards: cards, 
                     flavor: flavor, 
-                    decks: decks.slice(0, 10) 
+                    decks: decks.slice(0, 10),
                 })
         })
     })
