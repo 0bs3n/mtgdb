@@ -1,5 +1,6 @@
 ### MTGDB
 This project was created in line with Launchcode's apprenticeship path, which suggests a full stack web application to demonstrate working knowledge of all aspects of development.
+The frontend is a work in progress, and will likely employ either Angular or React.
 
 A Database of Magic the Gathering Cards, searchable by a variety of attributes including:
 * Name
