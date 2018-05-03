@@ -1,4 +1,6 @@
 ### MTGDB
+This project was created in line with Launchcode's apprenticeship path, which suggests a full stack web application to demonstrate working knowledge of all aspects of development.
+
 A Database of Magic the Gathering Cards, searchable by a variety of attributes including:
 * Name
 * Color
@@ -24,3 +26,10 @@ Each card listed in the deck leads back to a card view for more information on t
 ![deck view](docs/deck_view.png)
 
 Card and deck information will be updated weekly from their respective sources.
+
+#### Technologies
+Database - [MongoDB](https://github.com/mafintosh/mongojs)
+
+Server - [ExpressJS](https://expressjs.com/)
+
+Database interaction - [promised-mongo](https://github.com/gordonmleigh/promised-mongo)
