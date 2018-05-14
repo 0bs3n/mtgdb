@@ -5,9 +5,11 @@ block content
 
     h3 Maindeck
     for card in deck.maindeck
-        p #{card.quantity} x #{card.name}
+            p #{card.quantity} x 
+                a(href="/card/#{card.name}")  #{card.name}
 
     if deck.sideboard
         h3 Sideboard
         for card in deck.sideboard
-            p #{card.quantity} x #{card.name}
+            p #{card.quantity} x 
+                a(href="/card/#{card.name}")  #{card.name}

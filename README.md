@@ -28,6 +28,13 @@ Each card listed in the deck leads back to a card view for more information on t
 
 Card and deck information will be updated weekly from their respective sources.
 
+#### Installation
+    $ git clone https://github.com/Ethan-ks/mtgdb.git
+    $ cd mtgdb
+    $ npm install
+    $ npm start
+The express server runs on port 3000 on localhost by default.
+
 #### Technologies
 Database - [MongoDB](https://github.com/mafintosh/mongojs)
 

@@ -5,7 +5,7 @@ const mongojs = require('promised-mongo');
 const db = mongojs("MTGCards", ["cards"])
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
-const parseForImages = require('../jstesting/condense.js');
+const parseForImages = require('../utils/condense.js');
 
 router.get('/', 
     [
